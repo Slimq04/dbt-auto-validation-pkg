@@ -23,7 +23,7 @@ dbt-auto-validation-pkg/
 
 ### Added
 
-- **Openflow migration validation tests** (under `macros/audit_helper_comparisons/`), intended for comparing legacy Openflow pipelines to dbt models:
+- **Openflow migration validation tests** (under `macros/comparison/`), intended for comparing legacy Openflow pipelines to dbt models:
   - `openflow_migration_no_duplicates` — duplicate detection on a composite key.
   - `openflow_migration_compare_queries` — grouped baseline vs model comparison via `audit_helper.compare_queries` (optional time window defaults aligned with the calendar-gap test).
   - `openflow_migration_compare_columns` — column name / type / ordinal diffs via `audit_helper.compare_relation_columns`.
