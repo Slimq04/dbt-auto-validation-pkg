@@ -1,4 +1,4 @@
-{% test openflow_migration_no_data_gaps_calendar(
+{% test auto_validation_no_data_gaps_calendar(
     model,
     time_column,
     start_date=none,

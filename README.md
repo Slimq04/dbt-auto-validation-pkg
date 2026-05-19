@@ -1,10 +1,8 @@
 # dbt-auto-validation-pkg
 
-dbt package for automated validation (work in progress).
+dbt package: **`auto_validation_*`** generic tests (duplicates, grouped metric compare, column diff, calendar gaps) plus **`generate_auto_validation_tests`** for pasting YAML snippets. See [Usage](docs/usage.md) and [Migrating from v1.x](docs/migration.md).
 
-## Usage
-
-After this package is published or referenced by path, add it to your `packages.yml` and run `dbt deps`.
+Requires [`audit_helper`](https://hub.getdbt.com/) for the comparison-based tests. Add this repo to **`packages.yml`** and run **`dbt deps`**.
 
 ## Development
 

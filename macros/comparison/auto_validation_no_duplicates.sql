@@ -1,4 +1,4 @@
-{% test openflow_migration_no_duplicates(model, composite_key_columns) %}
+{% test auto_validation_no_duplicates(model, composite_key_columns) %}
 
   select
     {% for col in composite_key_columns -%}

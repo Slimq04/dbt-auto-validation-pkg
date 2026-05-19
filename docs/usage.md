@@ -10,12 +10,12 @@ dbt deps
 
 ## 2. Models & YAML
 
-Create or reuse a **`.yml`** (e.g. `_openflow_migration_models.yml`) for the models under test.
+Create or reuse a **`.yml`** (e.g. `_validation_models.yml`) for the models under test.
 
 ## 3. Generate snippets
 
 ```bash
-dbt run-operation generate_openflow_migration_tests --args '{
+dbt run-operation generate_auto_validation_tests --args '{
   "model_name": "your_new_model",
   "stage": "raw_ingestion",
   "composite_key_columns": ["id", "other_key"],
@@ -26,7 +26,9 @@ dbt run-operation generate_openflow_migration_tests --args '{
 }'
 ```
 
-Paste the **log output** into that YAML under the right model. Full signature: `macros/generate_openflow_migration_tests.sql`.
+Paste the **log output** into that YAML under the right model. Full signature: `macros/generate_auto_validation_tests.sql`.
+
+> Deprecated: `generate_openflow_migration_tests` still works and forwards to the macro above.
 
 ### Parameters by stage
 

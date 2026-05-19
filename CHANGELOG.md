@@ -5,6 +5,31 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-05-19
+
+### Changed (breaking)
+
+- Renamed generic tests and helpers from `openflow_migration_*` to **`auto_validation_*`** so they are not tied to Openflow only:
+  - `openflow_migration_no_duplicates` → `auto_validation_no_duplicates`
+  - `openflow_migration_compare_queries` → `auto_validation_compare_queries`
+  - `openflow_migration_compare_columns` → `auto_validation_compare_columns`
+  - `openflow_migration_no_data_gaps_calendar` → `auto_validation_no_data_gaps_calendar`
+- Renamed helper macro `openflow_migration_composite_key_order_expression` → **`auto_validation_composite_key_order_expression`** (`macros/auto_validation__composite_key.sql`).
+- Renamed snippet generator **`generate_openflow_migration_tests`** → **`generate_auto_validation_tests`** (`macros/generate_auto_validation_tests.sql`).
+- `generate_openflow_migration_tests` remains as a **deprecated** thin wrapper (same arguments) until a future removal.
+
+See **`docs/migration.md`** for a copy-paste rename table.
+
+[2.0.0]: https://github.com/Slimq04/dbt-auto-validation-pkg/releases/tag/v2.0.0
+
+## [1.1.1] - 2026-05-19
+
+### Fixed
+
+- `openflow_migration_compare_queries`: call `openflow_migration_composite_key_order_expression` via `dbt_auto_validation_pkg.` so the helper resolves when the package is installed in another project (avoids `'...' is undefined` at compile time).
+
+[1.1.1]: https://github.com/Slimq04/dbt-auto-validation-pkg/releases/tag/v1.1.1
+
 ## [1.1.0] - 2026-05-19
 
 ### Changed
@@ -14,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `docs/usage.md` — install, `run-operation`, parameter tables, `dbt test`.
-- `docs/migration.md` — placeholder for migration notes.
+- `docs/migration.md` — placeholder (filled in v2.0.0 with v1 → v2 rename guide).
 - `macros/integrity/` — placeholder directory for future integrity macros.
 
 [1.1.0]: https://github.com/Slimq04/dbt-auto-validation-pkg/releases/tag/v1.1.0
@@ -51,23 +76,3 @@ dbt-auto-validation-pkg/
 - Macro paths remain `macros/`; consumers add this package in `packages.yml` and run `dbt deps`.
 
 [1.0.0]: https://github.com/Slimq04/dbt-auto-validation-pkg/releases/tag/v1.0.0
-
-### Infrastructure Expectation for v2.0.0
-```
-dbt-auto-validation-pkg/
-├── macros/
-│   ├── integrity/     
-│   │   ├── no_duplicates_all_columns.sql
-│   │   ├── unit_test_template.sql    
-│   │   └── json_column_valid.sql      
-│   │
-│   ├── comparison/        
-│   │   ├── compare_queries.sql           
-│   │   ├── compare_columns.sql             
-│   │   ├── no_duplicates.sql             
-│   │   └── no_data_gaps_calendar.sql      
-│   │
-│   └── generate_openflow_migration_tests.sql
-└── ——— openflow_migration__composite_key.sql
-```
-Expect delivery date: `2026/05/15`

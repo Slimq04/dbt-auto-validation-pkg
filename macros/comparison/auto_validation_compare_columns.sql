@@ -1,5 +1,5 @@
 {#- Schema / column inventory: audit_helper.compare_relation_columns (names, types, ordinals). -#}
-{% test openflow_migration_compare_columns(model, baseline) %}
+{% test auto_validation_compare_columns(model, baseline) %}
 
   select *
   from (

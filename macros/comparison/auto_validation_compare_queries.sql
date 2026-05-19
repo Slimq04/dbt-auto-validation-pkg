@@ -3,13 +3,13 @@
 
   Optional date filter when time_column is set (non-blank): both subqueries add
   where to_date(<time_column>) between to_date('<start>') and to_date('<end>').
-  Omitted start_date / end_date default at compile time like openflow_migration_no_data_gaps_calendar:
+  Omitted start_date / end_date default at compile time like auto_validation_no_data_gaps_calendar:
     end → calendar day of run_started_at; start → end minus 3 calendar days.
   Partial overrides: only end_date → start defaults to end−3; only start_date → end defaults to run_started_at day.
 
   group_by_columns: if empty, falls back to composite_key_columns for GROUP BY / primary_key.
 -#}
-{% test openflow_migration_compare_queries(
+{% test auto_validation_compare_queries(
     model,
     baseline,
     composite_key_columns,
@@ -52,25 +52,25 @@
 
   {% if (_grp | length) == 0 %}
     {% do exceptions.raise_compiler_error(
-      "openflow_migration_compare_queries: set group_by_columns (non-empty) or composite_key_columns for GROUP BY."
+      "auto_validation_compare_queries: set group_by_columns (non-empty) or composite_key_columns for GROUP BY."
     ) %}
   {% endif %}
 
   {% if (_sum_cols | length) == 0 and (_cnt_cols | length) == 0 %}
     {% do exceptions.raise_compiler_error(
-      "openflow_migration_compare_queries: provide at least one column in sum_columns and/or count_columns."
+      "auto_validation_compare_queries: provide at least one column in sum_columns and/or count_columns."
     ) %}
   {% endif %}
 
   {% for c in _grp %}
     {% if c in _sum_cols %}
       {% do exceptions.raise_compiler_error(
-        "openflow_migration_compare_queries: group-by columns must not appear in sum_columns (" ~ c ~ ")."
+        "auto_validation_compare_queries: group-by columns must not appear in sum_columns (" ~ c ~ ")."
       ) %}
     {% endif %}
   {% endfor %}
 
-  {% set group_by_expr = openflow_migration_composite_key_order_expression(_grp) %}
+  {% set group_by_expr = dbt_auto_validation_pkg.auto_validation_composite_key_order_expression(_grp) %}
   {% set key_select = group_by_expr %}
   {% set primary_key = group_by_expr %}
 
