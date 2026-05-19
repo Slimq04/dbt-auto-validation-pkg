@@ -5,6 +5,20 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-05-19
+
+### Changed
+
+- Renamed macro directory `audit_helper_comparisons` → `comparison` (Openflow migration tests unchanged by name).
+
+### Added
+
+- `docs/usage.md` — install, `run-operation`, parameter tables, `dbt test`.
+- `docs/migration.md` — placeholder for migration notes.
+- `macros/integrity/` — placeholder directory for future integrity macros.
+
+[1.1.0]: https://github.com/Slimq04/dbt-auto-validation-pkg/releases/tag/v1.1.0
+
 ## [1.0.0] - 2026-05-13
 ### Infrastructure
 ```
